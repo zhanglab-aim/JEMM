@@ -1,3 +1,3 @@
-__version__ = '0.0.1'
-__date__ = '2021/10/04'
-__email__ = 'zj.z@ucla.edu'
+__version__ = '0.0.2'
+__date__ = '2022/11/30'
+__email__ = 'zijun.zhang@cshs.org'
