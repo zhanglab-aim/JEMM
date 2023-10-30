@@ -181,15 +181,24 @@ class JunctionCountTable(DataTable):
             assert (wd is not None) or (b1 is not None and b2 is not None)
             df = file
         if b1 is None:
-            b1 = open(os.path.join(wd, "b1.txt"), "r").readline().strip().split(",")
+            b1 = open(os.path.join(wd, "b1.txt"), "r").readline().strip()
+            if len(b1):
+                b1 = b1.split(",")
+            else:
+                b1 = []
         if b2 is None:
-            b2 = open(os.path.join(wd, "b2.txt"), "r").readline().strip().split(",")
+            b2 = open(os.path.join(wd, "b2.txt"), "r").readline().strip()
+            if len(b2):
+                b2 = b2.split(",")
+            else:
+                b2 = []
         if sample_name_getter is None:
             sample_name_getter = lambda x: x.split("/")[-2]
         else:
             assert callable(sample_name_getter) is True
         b1 = tuple([sample_name_getter(x) for x in b1])
         b2 = tuple([sample_name_getter(x) for x in b2])
+        assert len(b1) or len(b2), "Must provide at least either b1 or b2"
 
         # Process raw dataframe to make junction-count data frame
         event_ids = df.ID.tolist()
